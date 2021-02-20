@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @Data
-public class RefuellingRequestResponse {
+public class RefuellingRequest {
 
     private String userId;
     private BigDecimal price;
