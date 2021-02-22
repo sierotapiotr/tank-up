@@ -8,7 +8,7 @@ import pl.mtsolutions.tankup.repository.RefuellingRepository;
 import java.util.List;
 
 @RestController
-@RequestMapping("/refuelling")
+@RequestMapping("/refuellings")
 public class RefuellingController {
 
     private final RefuellingRepository refuellingRepository;
@@ -18,7 +18,7 @@ public class RefuellingController {
     }
 
 
-    @PostMapping()
+    @PostMapping
     public Refuelling createRefuelling(@RequestBody RefuellingRequest refuellingRequest) {
         Refuelling refuelling = new Refuelling();
         refuelling.setUserId(refuellingRequest.getUserId());
@@ -27,8 +27,8 @@ public class RefuellingController {
         return refuellingRepository.save(refuelling);
     }
 
-    @GetMapping("/all")
-    public List<Refuelling> getAllRefuellings() {
-        return refuellingRepository.findAll();
+    @GetMapping("/{userId}")
+    public List<Refuelling> getUserRefuellings(@PathVariable String userId) {
+        return refuellingRepository.findAllByUserId(userId);
     }
 }
