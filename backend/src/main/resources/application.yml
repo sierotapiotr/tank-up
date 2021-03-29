@@ -4,3 +4,5 @@ spring:
         database: tankup
         port: 2701
 
+server:
+    port: 13002
