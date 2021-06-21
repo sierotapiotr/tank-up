@@ -1,0 +1,15 @@
+<form [formGroup]="form">
+  <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
+    <mat-form-field>
+      <mat-label>Kwota</mat-label>
+      <input matInput [formControlName]="'price'">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Typ paliwa</mat-label>
+      <mat-select [formControlName]="'fuelType'">
+        <mat-option *ngFor="let fuelType of fuelTypes" [value]="fuelType">{{fuelType}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</form>
+<button mat-button color="primary" (click)="addRefuelling()">Dodaj</button>

@@ -8,7 +8,7 @@ import pl.mtsolutions.tankup.repository.RefuellingRepository;
 import java.util.List;
 
 @RestController
-@RequestMapping("/refuellings")
+@RequestMapping("/refuelling")
 public class RefuellingController {
 
     private final RefuellingRepository refuellingRepository;
