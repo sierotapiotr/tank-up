@@ -18,13 +18,16 @@ import {BalanceService} from './shared/service/balance.service';
 import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
 import {SnackbarService} from './shared/service/snackbar.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {HistoryComponent} from './history/history.component';
+import {RideService} from './shared/service/ride.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     RefuellingComponent,
-    RideComponent
+    RideComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
   providers: [
     FlexLayoutModule,
     RefuellingService,
+    RideService,
     BalanceService,
     SnackbarService
   ],

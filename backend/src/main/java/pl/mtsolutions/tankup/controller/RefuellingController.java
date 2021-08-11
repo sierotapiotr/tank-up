@@ -17,7 +17,6 @@ public class RefuellingController {
         this.refuellingRepository = refuellingRepository;
     }
 
-
     @PostMapping
     public Refuelling createRefuelling(@RequestBody RefuellingRequest refuellingRequest) {
         Refuelling refuelling = new Refuelling();

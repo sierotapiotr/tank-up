@@ -15,4 +15,8 @@ export class RefuellingService {
     return this.httpClient.post<Refuelling>(`${RefuellingService.API_PATH}`, refuelling);
   }
 
+  getRefuellings(userId: string): Observable<Refuelling[]> {
+    return this.httpClient.get<Refuelling[]>(`${RefuellingService.API_PATH}/${userId}`);
+  }
+
 }

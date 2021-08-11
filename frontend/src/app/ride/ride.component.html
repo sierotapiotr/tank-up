@@ -1,1 +1,15 @@
-<p>ride works!</p>
+<form [formGroup]="form">
+  <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
+    <mat-form-field>
+      <mat-label>Dystans</mat-label>
+      <input matInput [formControlName]="'distance'">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Pasażerowie</mat-label>
+<!--      <mat- [formControlName]="'passengerIds'">-->
+<!--        <mat-option *ngFor="let id of [1,2,3,4,5]" >{{id}}</mat-option>-->
+<!--      </mat->-->
+    </mat-form-field>
+  </div>
+</form>
+<button mat-button color="primary" (click)="addRide()">Dodaj</button>
