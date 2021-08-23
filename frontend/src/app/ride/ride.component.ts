@@ -10,12 +10,16 @@ import {Ride} from '../shared/model/ride.model';
   styleUrls: ['./ride.component.scss']
 })
 export class RideComponent implements OnInit {
-  public form: FormGroup = this.formBuilder.group({});
 
   constructor(private formBuilder: FormBuilder,
               private rideService: RideService,
               private snackbarService: SnackbarService) {
   }
+
+  public form: FormGroup = this.formBuilder.group({
+    distance: null,
+    passengerIds: []
+  });
 
   ngOnInit() {
   }
