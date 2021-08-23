@@ -8,7 +8,7 @@ import pl.mtsolutions.tankup.pojo.UserBalanceResponse;
 import pl.mtsolutions.tankup.service.UserBalanceService;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
     private final UserBalanceService userBalanceService;

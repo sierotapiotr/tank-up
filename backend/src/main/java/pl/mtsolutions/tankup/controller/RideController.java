@@ -9,7 +9,7 @@ import pl.mtsolutions.tankup.repository.RideRepository;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rides")
+@RequestMapping("/ride")
 public class RideController {
 
     private final RideRepository rideRepository;

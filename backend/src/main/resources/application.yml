@@ -1,8 +1,10 @@
+server:
+    port: 13002
+    servlet:
+        context-path: /api
+
 spring:
     data.mongodb:
         host: 127.0.0.1
         database: tankup
         port: 2701
-
-server:
-    port: 13002
