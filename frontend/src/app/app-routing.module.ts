@@ -4,6 +4,7 @@ import {RefuellingComponent} from './refuelling/refuelling.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {RideComponent} from './ride/ride.component';
 import {HistoryComponent} from './history/history.component';
+import {AdminComponent} from './admin/admin.component';
 
 
 const routes: Routes = [
@@ -11,7 +12,8 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: 'refuelling', component: RefuellingComponent},
   {path: 'ride', component: RideComponent},
-  {path: 'history', component: HistoryComponent}
+  {path: 'history', component: HistoryComponent},
+  {path: 'admin', component: AdminComponent},
 ];
 
 @NgModule({

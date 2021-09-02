@@ -1,0 +1,10 @@
+<div fxLayout="row" fxLayoutGap="10px" *ngFor="let user of users">
+  <p>{{user.name}}</p>
+  <button (click)="deleteUser(user.id)">Usuń</button>
+</div>
+<p>Nowy użytkownik</p>
+<mat-form-field >
+  <mat-label>Nazwa</mat-label>
+  <input matInput [formControl]="userNameControl">
+</mat-form-field>
+<button (click)="addUser(userNameControl.value)">Dodaj</button>

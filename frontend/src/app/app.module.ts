@@ -20,6 +20,8 @@ import {SnackbarService} from './shared/service/snackbar.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {HistoryComponent} from './history/history.component';
 import {RideService} from './shared/service/ride.service';
+import { AdminComponent } from './admin/admin.component';
+import {UserService} from './shared/service/user.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import {RideService} from './shared/service/ride.service';
     DashboardComponent,
     RefuellingComponent,
     RideComponent,
-    HistoryComponent
+    HistoryComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ import {RideService} from './shared/service/ride.service';
     RefuellingService,
     RideService,
     BalanceService,
-    SnackbarService
+    SnackbarService,
+    UserService,
   ],
   bootstrap: [AppComponent]
 })
