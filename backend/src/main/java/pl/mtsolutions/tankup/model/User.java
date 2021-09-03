@@ -7,7 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document(collection = "refuellings")
+@Document(collection = "users")
 @NoArgsConstructor
 public class User {
 

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {User} from '../model/user.model';
 
 @Injectable()
@@ -10,6 +10,9 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) {
   }
+
+  public users = new BehaviorSubject<User[]>([]);
+  public currentUserId = new BehaviorSubject<string>(null);
 
   getAll(): Observable<User[]> {
     return this.httpClient.get<User[]>(`${UserService.API_PATH}/all`)

@@ -22,6 +22,7 @@ import {HistoryComponent} from './history/history.component';
 import {RideService} from './shared/service/ride.service';
 import { AdminComponent } from './admin/admin.component';
 import {UserService} from './shared/service/user.service';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {UserService} from './shared/service/user.service';
     MatInputModule,
     FlexLayoutModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule
   ],
   providers: [
     FlexLayoutModule,
