@@ -26,22 +26,27 @@ export class RideComponent implements OnInit {
   ngOnInit() {
     this.userService.users.subscribe(users => {
       this.passengerIdsFormArray.clear();
-      users.forEach(() => this.passengerIdsFormArray.push(new FormControl(false)));
+      users.forEach(user => this.passengerIdsFormArray.push(new FormControl(this.isUserTheCurrentUser(user.id))));
+
     })
+  }
+
+  private isUserTheCurrentUser(id: string): boolean {
+    return id === this.userService.currentUserId.getValue();
   }
 
   get passengerIdsFormArray(): FormArray {
     return this.form.controls.passengerIds as FormArray;
   }
 
-  addRide() {
+  public addRide(): void {
     const checkedPassengerIds = this.userService.users.getValue()
       .filter((user, index) => !!this.passengerIdsFormArray.value[index])
       .map(user => user.id);
     const ride = Object.assign(new Ride(), this.form.value, {passengerIds: checkedPassengerIds});
     this.rideService.addRide(ride).subscribe(value => {
       this.snackbarService.positive('Przejazd dodany')
-    }, error => {
+    }, () => {
       this.snackbarService.negative('Nie udało się dodać przejazdu.')
     })
   }
