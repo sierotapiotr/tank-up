@@ -3,5 +3,6 @@ import {FormTransformer} from './form-transformer';
 
 export class Refuelling extends FormTransformer<Refuelling> {
   price: number;
+  date: string;
   fuelType: FuelType;
 }

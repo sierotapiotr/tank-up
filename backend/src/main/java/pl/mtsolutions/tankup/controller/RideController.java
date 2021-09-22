@@ -1,12 +1,13 @@
 package pl.mtsolutions.tankup.controller;
 
 import org.springframework.web.bind.annotation.*;
-import pl.mtsolutions.tankup.model.Refuelling;
 import pl.mtsolutions.tankup.model.Ride;
 import pl.mtsolutions.tankup.pojo.RideRequest;
 import pl.mtsolutions.tankup.repository.RideRepository;
 
 import java.util.List;
+
+import static java.time.LocalDateTime.now;
 
 @RestController
 @RequestMapping("/ride")
@@ -26,12 +27,13 @@ public class RideController {
         ride.setPassengerIds(rideRequest.getPassengerIds());
         ride.setCar(rideRequest.getCar());
         ride.setDistance(rideRequest.getDistance());
+        ride.setDate(now());
         return rideRepository.save(ride);
     }
 
     @GetMapping("/{userId}")
     public List<Ride> getUserRides(@PathVariable String userId) {
-        return rideRepository.findAllByUserId(userId);
+        return rideRepository.findAllByPassengerIdsContaining(userId);
     }
 
 

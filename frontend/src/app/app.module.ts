@@ -23,6 +23,7 @@ import {RideService} from './shared/service/ride.service';
 import { AdminComponent } from './admin/admin.component';
 import {UserService} from './shared/service/user.service';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -33,20 +34,21 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     HistoryComponent,
     AdminComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    NoopAnimationsModule,
-    MatSnackBarModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatCheckboxModule
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        NoopAnimationsModule,
+        MatSnackBarModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FlexLayoutModule,
+        MatButtonModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatTabsModule
+    ],
   providers: [
     FlexLayoutModule,
     RefuellingService,

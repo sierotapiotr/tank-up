@@ -1,2 +1,26 @@
-<p *ngFor="let ride of rides">{{ride.distance}}</p>
-<p *ngFor="let refuelling of refuellings">{{refuelling.price}} PLN</p>
+<mat-tab-group>
+  <mat-tab label="Przejazdy">
+    <div fxLayout="row" fxLayoutGap="10px">
+      <p fxFlex>Data</p>
+      <p fxFlex>Dystans</p>
+      <p fxFlex>Pasażerowie</p>
+    </div>
+    <div fxLayout="row" *ngFor="let ride of rides">
+      <p fxFlex>{{ride.date}}</p>
+      <p fxFlex>{{ride.distance}}</p>
+      <p fxFlex>{{ride.passengerIds}}</p>
+    </div>
+  </mat-tab>
+  <mat-tab label="Tankowania">
+    <div fxLayout="row">
+      <p>Data</p>
+      <p>Kwota</p>
+      <p>Rodzaj paliwa</p>
+    </div>
+    <div fxLayout="row" *ngFor="let refuelling of refuellings">
+      <p>{{refuelling.date}}</p>
+      <p>{{refuelling.price}}</p>
+      <p>{{refuelling.fuelType}}</p>
+    </div>
+  </mat-tab>
+</mat-tab-group>

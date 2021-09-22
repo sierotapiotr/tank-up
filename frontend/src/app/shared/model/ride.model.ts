@@ -1,8 +1,7 @@
-import {FormTransformer} from './form-transformer';
-
-export class Ride extends FormTransformer<Ride>{
+export class Ride {
 
   distance: number;
+  date: string;
   passengerIds: string[];
 
 }

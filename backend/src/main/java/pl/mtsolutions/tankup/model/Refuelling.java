@@ -8,7 +8,7 @@ import pl.mtsolutions.tankup.pojo.Car;
 import pl.mtsolutions.tankup.pojo.FuelType;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Document(collection = "refuellings")
@@ -18,7 +18,7 @@ public class Refuelling {
     @Id
     private String id;
     private String userId;
-    private LocalDate date;
+    private LocalDateTime date;
     private BigDecimal price;
     private FuelType fuelType;
     private Car car;

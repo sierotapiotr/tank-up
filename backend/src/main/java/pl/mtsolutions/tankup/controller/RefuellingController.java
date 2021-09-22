@@ -7,6 +7,8 @@ import pl.mtsolutions.tankup.repository.RefuellingRepository;
 
 import java.util.List;
 
+import static java.time.LocalDateTime.now;
+
 @RestController
 @RequestMapping("/refuelling")
 public class RefuellingController {
@@ -23,6 +25,7 @@ public class RefuellingController {
         refuelling.setUserId(refuellingRequest.getUserId());
         refuelling.setPrice(refuellingRequest.getPrice());
         refuelling.setFuelType(refuellingRequest.getFuelType());
+        refuelling.setDate(now());
         return refuellingRepository.save(refuelling);
     }
 

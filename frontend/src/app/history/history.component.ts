@@ -4,6 +4,8 @@ import {forkJoin} from 'rxjs';
 import {RideService} from '../shared/service/ride.service';
 import {Ride} from '../shared/model/ride.model';
 import {Refuelling} from '../shared/model/refuelling.model';
+import {UserService} from '../shared/service/user.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-history',
@@ -12,23 +14,33 @@ import {Refuelling} from '../shared/model/refuelling.model';
 })
 export class HistoryComponent implements OnInit {
 
-  public rides: Ride[];
-  public refuellings: Refuelling[];
+  public rides: Ride[] = [];
+  public refuellings: Refuelling[] = [];
+
+  public getElementType(element: Ride | Refuelling): string {
+    return (typeof element);
+  }
 
   constructor(private refuellingService: RefuellingService,
-              private rideService: RideService) {
+              private rideService: RideService,
+              private userService: UserService) {
   }
 
   ngOnInit() {
     this.loadHistory()
   }
 
-  private loadHistory() {
-    forkJoin([this.refuellingService.getRefuellings('1'),
-      this.rideService.getRides('1')])
+  private sortByDate() {
+    return (elementA, elementB) => moment(elementA.date).valueOf() - moment(elementB.date).valueOf();
+  }
+
+  private loadHistory(): void {
+    const currentUserId = this.userService.currentUserId.getValue();
+    forkJoin([this.refuellingService.getRefuellings(currentUserId),
+      this.rideService.getRides(currentUserId)])
       .subscribe(([refuellings, rides]) => {
-        this.refuellings = refuellings;
-        this.rides = rides;
+        this.refuellings = refuellings.sort(this.sortByDate());
+        this.rides = rides.sort(this.sortByDate());
       });
   }
 

@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import pl.mtsolutions.tankup.pojo.Car;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -17,7 +18,7 @@ public class Ride {
     @Id
     private String id;
     private String userId;
-    private LocalDate date;
+    private LocalDateTime date;
     private List<String> passengerIds;
     private int distance;
     private Car car;
