@@ -40,9 +40,9 @@ export class RideComponent implements OnInit {
       .map(user => user.id);
     const ride = Object.assign(new Ride(), this.form.value, {passengerIds: checkedPassengerIds});
     this.rideService.addRide(ride).subscribe(value => {
-      this.snackbarService.positive('Tankowanie dodane')
+      this.snackbarService.positive('Przejazd dodany')
     }, error => {
-      this.snackbarService.negative('Nie udało się dodać tankowania')
+      this.snackbarService.negative('Nie udało się dodać przejazdu.')
     })
   }
 }

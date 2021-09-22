@@ -24,6 +24,7 @@ import { AdminComponent } from './admin/admin.component';
 import {UserService} from './shared/service/user.service';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
+import {CookieService} from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     BalanceService,
     SnackbarService,
     UserService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

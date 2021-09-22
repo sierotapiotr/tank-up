@@ -2,9 +2,8 @@
   <h1 routerLink="/dashboard">{{title}}</h1>
   <div fxLayout="row" fxLayoutGap="10px">
     <span>Użytkownik:</span>
-    <mat-select fxFlex="80px">
-      <mat-option *ngFor="let user of userService.users.getValue()" [value]="user.id"
-                  (onSelectionChange)="setCurrentUserId(user.id)">
+    <mat-select fxFlex="80px" [formControl]="currentUserControl">
+      <mat-option *ngFor="let user of userService.users.getValue()" [value]="user.id">
         {{user.name}}
       </mat-option>
     </mat-select>

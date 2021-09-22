@@ -6,21 +6,21 @@
       <p fxFlex>Pasażerowie</p>
     </div>
     <div fxLayout="row" *ngFor="let ride of rides">
-      <p fxFlex>{{ride.date}}</p>
-      <p fxFlex>{{ride.distance}}</p>
-      <p fxFlex>{{ride.passengerIds}}</p>
+      <p fxFlex>{{ride.date | date: 'dd.MM.yyyy'}}</p>
+      <p fxFlex>{{ride.distance}} km</p>
+      <p fxFlex>{{getPassengerNames(ride.passengerIds)}}</p>
     </div>
   </mat-tab>
   <mat-tab label="Tankowania">
     <div fxLayout="row">
-      <p>Data</p>
-      <p>Kwota</p>
-      <p>Rodzaj paliwa</p>
+      <p fxFlex>Data</p>
+      <p fxFlex>Kwota</p>
+      <p fxFlex>Rodzaj paliwa</p>
     </div>
     <div fxLayout="row" *ngFor="let refuelling of refuellings">
-      <p>{{refuelling.date}}</p>
-      <p>{{refuelling.price}}</p>
-      <p>{{refuelling.fuelType}}</p>
+      <p fxFlex>{{refuelling.date | date: 'dd.MM.yyyy'}}</p>
+      <p fxFlex>{{refuelling.price}} zł</p>
+      <p fxFlex>{{fuelTypeNames[refuelling.fuelType]}}</p>
     </div>
   </mat-tab>
 </mat-tab-group>

@@ -7,7 +7,8 @@
     <mat-form-field>
       <mat-label>Typ paliwa</mat-label>
       <mat-select [formControlName]="'fuelType'">
-        <mat-option *ngFor="let fuelType of fuelTypes" [value]="fuelType">{{fuelType}}</mat-option>
+        <mat-option *ngFor="let fuelType of fuelTypes" [value]="fuelType">{{fuelTypeNames[fuelType]}}</mat-option>
+        <mat-option >ds</mat-option>
       </mat-select>
     </mat-form-field>
   </div>

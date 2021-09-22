@@ -29,4 +29,8 @@ export class UserService {
   delete(id: string): Observable<User> {
     return this.httpClient.delete<User>(`${UserService.API_PATH}/${id}`)
   }
+
+  setCurrentUserId(id: string) {
+    return this.httpClient.post<User>(`${UserService.API_PATH}/setCurrentUser`, id);
+  }
 }
