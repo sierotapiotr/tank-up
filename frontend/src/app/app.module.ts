@@ -25,6 +25,7 @@ import {UserService} from './shared/service/user.service';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
 import {CookieService} from 'ngx-cookie-service';
+import {CarService} from './shared/service/car.service';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import {CookieService} from 'ngx-cookie-service';
     ],
   providers: [
     FlexLayoutModule,
+    CarService,
     RefuellingService,
     RideService,
     BalanceService,

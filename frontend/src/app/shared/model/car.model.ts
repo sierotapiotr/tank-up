@@ -1,5 +1,7 @@
-export enum Car {
-  PEUGEOT_406 = 'PEUGEOT_406',
-  YARIS = 'YARIS',
-  SKODA = 'SKODA'
+import {CarStatus} from './car-status.enum';
+
+export class Car {
+  id: string;
+  name: string;
+  status: CarStatus;
 }

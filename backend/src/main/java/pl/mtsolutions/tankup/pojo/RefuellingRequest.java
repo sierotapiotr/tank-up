@@ -1,6 +1,7 @@
 package pl.mtsolutions.tankup.pojo;
 
 import lombok.Data;
+import pl.mtsolutions.tankup.model.Car;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -12,5 +13,5 @@ public class RefuellingRequest {
     private LocalDate date;
     private BigDecimal price;
     private FuelType fuelType;
-    private Car car;
+    private String carId;
 }

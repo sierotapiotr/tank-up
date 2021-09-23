@@ -23,6 +23,7 @@ public class RefuellingController {
     public Refuelling createRefuelling(@RequestBody RefuellingRequest refuellingRequest) {
         Refuelling refuelling = new Refuelling();
         refuelling.setUserId(refuellingRequest.getUserId());
+        refuelling.setCarId(refuellingRequest.getCarId());
         refuelling.setPrice(refuellingRequest.getPrice());
         refuelling.setFuelType(refuellingRequest.getFuelType());
         refuelling.setDate(now());

@@ -7,6 +7,7 @@ import {Refuelling} from '../shared/model/refuelling.model';
 import {UserService} from '../shared/service/user.service';
 import * as moment from 'moment';
 import {FuelTypeNames} from '../shared/model/fuel-type-names';
+import {CarService} from '../shared/service/car.service';
 
 @Component({
   selector: 'app-history',
@@ -17,10 +18,12 @@ export class HistoryComponent implements OnInit {
 
   public rides: Ride[] = [];
   public refuellings: Refuelling[] = [];
-  public userIdToUserNameMap = new Map();
+  private userIdToUserNameMap = new Map();
   public fuelTypeNames = FuelTypeNames.NAMES;
+  private carIdToCarNameMap = new Map();
 
-  constructor(private refuellingService: RefuellingService,
+  constructor(private carService: CarService,
+              private refuellingService: RefuellingService,
               private rideService: RideService,
               private userService: UserService) {
   }
@@ -28,6 +31,7 @@ export class HistoryComponent implements OnInit {
   ngOnInit() {
     this.userService.currentUserId.subscribe(() => this.loadHistory());
     this.userService.users.getValue().forEach(user => this.userIdToUserNameMap.set(user.id, user.name));
+    this.carService.cars.getValue().forEach(car => this.carIdToCarNameMap.set(car.id, car.name));
   }
 
   private sortByDate() {
@@ -46,5 +50,9 @@ export class HistoryComponent implements OnInit {
 
   public getPassengerNames(passengerIds: string[]): string {
     return passengerIds.map(passengerId => this.userIdToUserNameMap.get(passengerId)).join(', ');
+  }
+
+  public getCarName(carId: string): string {
+    return this.carIdToCarNameMap.get(carId);
   }
 }

@@ -1,10 +1,28 @@
-<div fxLayout="row" fxLayoutGap="10px" *ngFor="let user of users">
-  <p>{{user.name}}</p>
-  <button (click)="deleteUser(user.id)">Usuń</button>
+<div fxLayout="row">
+  <div fxFlex>
+    <p>Użytkownicy</p>
+    <div fxLayout="row" fxLayoutGap="10px" *ngFor="let user of userService.users.getValue()">
+      <p>{{user.name}}</p>
+      <button (click)="deleteUser(user.id)">Usuń</button>
+    </div>
+    <p>Nowy użytkownik</p>
+    <mat-form-field>
+      <mat-label>Imię</mat-label>
+      <input matInput [formControl]="userNameControl">
+    </mat-form-field>
+    <button (click)="addUser(userNameControl.value)">Dodaj</button>
+  </div>
+  <div fxFlex>
+    <p>Samochody</p>
+    <div fxLayout="row" fxLayoutGap="10px" *ngFor="let car of activeCars">
+      <p>{{car.name}}</p>
+      <button (click)="deleteCar(car.id)">Usuń</button>
+    </div>
+    <p>Nowy samochód</p>
+    <mat-form-field>
+      <mat-label>Nazwa</mat-label>
+      <input matInput [formControl]="carNameControl">
+    </mat-form-field>
+    <button (click)="addCar(carNameControl.value)">Dodaj</button>
+  </div>
 </div>
-<p>Nowy użytkownik</p>
-<mat-form-field >
-  <mat-label>Nazwa</mat-label>
-  <input matInput [formControl]="userNameControl">
-</mat-form-field>
-<button (click)="addUser(userNameControl.value)">Dodaj</button>

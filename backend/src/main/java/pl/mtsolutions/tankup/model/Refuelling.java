@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import pl.mtsolutions.tankup.pojo.Car;
 import pl.mtsolutions.tankup.pojo.FuelType;
 
 import java.math.BigDecimal;
@@ -21,7 +20,7 @@ public class Refuelling {
     private LocalDateTime date;
     private BigDecimal price;
     private FuelType fuelType;
-    private Car car;
+    private String carId;
 
 }
 

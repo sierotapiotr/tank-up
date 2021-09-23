@@ -22,15 +22,11 @@ export class UserService {
     return this.httpClient.post<User>(`${UserService.API_PATH}`, user)
   }
 
-  update(user: User): Observable<User> {
-    return this.httpClient.put<User>(`${UserService.API_PATH}/${user.id}`, user)
-  }
-
   delete(id: string): Observable<User> {
     return this.httpClient.delete<User>(`${UserService.API_PATH}/${id}`)
   }
 
   setCurrentUserId(id: string) {
-    return this.httpClient.post<User>(`${UserService.API_PATH}/setCurrentUser`, id);
+    return this.httpClient.post(`${UserService.API_PATH}/setCurrentUser`, id);
   }
 }

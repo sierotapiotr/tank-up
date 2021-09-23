@@ -10,6 +10,12 @@
         <mat-option *ngFor="let fuelType of fuelTypes" [value]="fuelType">{{fuelTypeNames[fuelType]}}</mat-option>
       </mat-select>
     </mat-form-field>
+    <span>Samochód</span>
+    <mat-select fxFlex="80px" [formControlName]="'carId'">
+      <mat-option *ngFor="let car of activeCars" [value]="car.id">
+        {{car.name}}
+      </mat-option>
+    </mat-select>
   </div>
 </form>
 <button mat-button color="primary" (click)="addRefuelling()">Dodaj</button>

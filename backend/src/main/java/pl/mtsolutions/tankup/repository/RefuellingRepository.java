@@ -3,7 +3,7 @@ package pl.mtsolutions.tankup.repository;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import pl.mtsolutions.tankup.model.Refuelling;
-import pl.mtsolutions.tankup.pojo.Car;
+import pl.mtsolutions.tankup.model.Car;
 
 import java.util.List;
 
@@ -12,5 +12,5 @@ public interface RefuellingRepository extends MongoRepository<Refuelling, String
 
     List<Refuelling> findAllByUserId(String userId);
 
-    List<Refuelling> findAllByCar(Car car);
+    List<Refuelling> findAllByCarId(String carId);
 }

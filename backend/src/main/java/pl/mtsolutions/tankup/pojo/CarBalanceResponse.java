@@ -2,6 +2,7 @@ package pl.mtsolutions.tankup.pojo;
 
 import lombok.Builder;
 import lombok.Data;
+import pl.mtsolutions.tankup.model.Car;
 
 import java.math.BigDecimal;
 
@@ -9,7 +10,7 @@ import java.math.BigDecimal;
 @Data
 public class CarBalanceResponse {
 
-    private Car car;
+    private String carId;
     private BigDecimal tankedFuelCost;
     private BigDecimal spentFuelCost;
 

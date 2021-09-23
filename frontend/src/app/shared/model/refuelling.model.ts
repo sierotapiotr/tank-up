@@ -6,4 +6,5 @@ export class Refuelling extends FormTransformer<Refuelling> {
   date: string;
   userId: string;
   fuelType: FuelType;
+  carId: string;
 }

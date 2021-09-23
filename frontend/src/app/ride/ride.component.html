@@ -9,6 +9,12 @@
       <mat-checkbox *ngFor="let user of userService.users.getValue(); let i = index"
                     [formControlName]="i.toString()" [value]="user.id">{{user.name}}</mat-checkbox>
     </ng-container>
+    <span>Samochód</span>
+    <mat-select fxFlex="80px" formControlName="carId">
+      <mat-option *ngFor="let car of activeCars" [value]="car.id">
+        {{car.name}}
+      </mat-option>
+    </mat-select>
   </div>
 </form>
 <button mat-button color="primary" (click)="addRide()">Dodaj</button>

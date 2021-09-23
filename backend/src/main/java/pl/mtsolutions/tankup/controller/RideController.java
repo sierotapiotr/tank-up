@@ -25,7 +25,7 @@ public class RideController {
         Ride ride = new Ride();
         ride.setUserId(rideRequest.getUserId());
         ride.setPassengerIds(rideRequest.getPassengerIds());
-        ride.setCar(rideRequest.getCar());
+        ride.setCarId(rideRequest.getCarId());
         ride.setDistance(rideRequest.getDistance());
         ride.setDate(now());
         return rideRepository.save(ride);
