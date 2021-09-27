@@ -22,4 +22,8 @@ export class RideService {
   delete(rideId: string) {
     return this.httpClient.delete(`${RideService.API_PATH}/${rideId}`)
   }
+
+  deleteAll() {
+    return this.httpClient.delete(`${RideService.API_PATH}/all`);
+  }
 }

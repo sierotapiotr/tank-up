@@ -39,4 +39,9 @@ public class RefuellingController {
     public void deleteRefuelling(@PathVariable String refuellingId) {
         refuellingRepository.deleteById(refuellingId);
     }
+
+    @DeleteMapping("/all")
+    public void deleteAllRefuellings() {
+        refuellingRepository.deleteAll();
+    }
 }

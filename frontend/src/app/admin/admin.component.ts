@@ -5,6 +5,11 @@ import {FormControl} from '@angular/forms';
 import {Car} from '../shared/model/car.model';
 import {CarService} from '../shared/service/car.service';
 import {CarStatus} from '../shared/model/car-status.enum';
+import {Refuelling} from '../shared/model/refuelling.model';
+import {RefuellingService} from '../shared/service/refuelling.service';
+import {RideService} from '../shared/service/ride.service';
+import {forkJoin} from 'rxjs';
+import {SnackbarService} from '../shared/service/snackbar.service';
 
 @Component({
   selector: 'app-admin',
@@ -17,6 +22,9 @@ export class AdminComponent implements OnInit {
   public carNameControl = new FormControl();
 
   constructor(private carService: CarService,
+              private refuellingService: RefuellingService,
+              private rideService: RideService,
+              private snackbarService: SnackbarService,
               public userService: UserService) {
   }
 
@@ -52,6 +60,14 @@ export class AdminComponent implements OnInit {
       const cars = this.carService.cars.getValue().filter(car => car.id !== id);
       this.carService.cars.next(cars);
     });
+  }
 
+  public resetHistory(): void {
+    forkJoin([
+      this.refuellingService.deleteAll(),
+      this.rideService.deleteAll()])
+      .subscribe(value => {
+        this.snackbarService.positive('Historia zresetowana.')
+      })
   }
 }

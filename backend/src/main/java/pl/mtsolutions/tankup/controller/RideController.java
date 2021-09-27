@@ -41,4 +41,9 @@ public class RideController {
         rideRepository.deleteById(rideId);
     }
 
+    @DeleteMapping("/all")
+    public void deleteAllRides() {
+        rideRepository.deleteAll();
+    }
+
 }
