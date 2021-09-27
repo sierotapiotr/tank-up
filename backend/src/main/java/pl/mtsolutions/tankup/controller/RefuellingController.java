@@ -34,4 +34,9 @@ public class RefuellingController {
     public List<Refuelling> getUserRefuellings(@PathVariable String userId) {
         return refuellingRepository.findAllByUserId(userId);
     }
+
+    @DeleteMapping("/{refuellingId}")
+    public void deleteRefuelling(@PathVariable String refuellingId) {
+        refuellingRepository.deleteById(refuellingId);
+    }
 }

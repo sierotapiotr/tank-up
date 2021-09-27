@@ -19,4 +19,7 @@ export class RideService {
     return this.httpClient.get<Ride[]>(`${RideService.API_PATH}/${userId}`);
   }
 
+  delete(rideId: string) {
+    return this.httpClient.delete(`${RideService.API_PATH}/${rideId}`)
+  }
 }

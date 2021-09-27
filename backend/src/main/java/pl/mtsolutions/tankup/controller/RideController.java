@@ -36,5 +36,9 @@ public class RideController {
         return rideRepository.findAllByPassengerIdsContaining(userId);
     }
 
+    @DeleteMapping("/{rideId}")
+    public void deleteRide(@PathVariable String rideId) {
+        rideRepository.deleteById(rideId);
+    }
 
 }

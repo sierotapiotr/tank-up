@@ -19,4 +19,8 @@ export class RefuellingService {
     return this.httpClient.get<Refuelling[]>(`${RefuellingService.API_PATH}/${userId}`);
   }
 
+  delete(refuellingId: string) {
+    return this.httpClient.delete(`${RefuellingService.API_PATH}/${refuellingId}`)
+  }
+
 }

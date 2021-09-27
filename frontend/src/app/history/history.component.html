@@ -5,12 +5,16 @@
       <p fxFlex>Auto</p>
       <p fxFlex>Dystans</p>
       <p fxFlex>Pasażerowie</p>
+      <p fxFlex>Akcje</p>
     </div>
     <div fxLayout="row" *ngFor="let ride of rides">
       <p fxFlex>{{ride.date | date: 'dd.MM.yyyy'}}</p>
       <p fxFlex>{{getCarName(ride.carId)}}</p>
       <p fxFlex>{{ride.distance}} km</p>
       <p fxFlex>{{getPassengerNames(ride.passengerIds)}}</p>
+      <div fxFlex>
+        <button (click)="deleteRide(ride)">Usuń</button>
+      </div>
     </div>
   </mat-tab>
   <mat-tab label="Tankowania">
@@ -19,12 +23,16 @@
       <p fxFlex>Auto</p>
       <p fxFlex>Kwota</p>
       <p fxFlex>Rodzaj paliwa</p>
+      <p fxFlex>Akcje</p>
     </div>
     <div fxLayout="row" *ngFor="let refuelling of refuellings">
       <p fxFlex>{{refuelling.date | date: 'dd.MM.yyyy'}}</p>
       <p fxFlex>{{getCarName(refuelling.carId)}}</p>
       <p fxFlex>{{refuelling.price}} zł</p>
       <p fxFlex>{{fuelTypeNames[refuelling.fuelType]}}</p>
+      <div fxFlex>
+        <button (click)="deleteRefuelling(refuelling)">Usuń</button>
+      </div>
     </div>
   </mat-tab>
 </mat-tab-group>

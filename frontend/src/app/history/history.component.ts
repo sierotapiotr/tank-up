@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RefuellingService} from '../shared/service/refuelling.service';
-import {forkJoin} from 'rxjs';
+import {forkJoin, Observable} from 'rxjs';
 import {RideService} from '../shared/service/ride.service';
 import {Ride} from '../shared/model/ride.model';
 import {Refuelling} from '../shared/model/refuelling.model';
@@ -34,18 +34,25 @@ export class HistoryComponent implements OnInit {
     this.carService.cars.getValue().forEach(car => this.carIdToCarNameMap.set(car.id, car.name));
   }
 
+  private getRidesObservable(): Observable<Ride[]> {
+    return this.rideService.getRides(this.userService.currentUserId.getValue())
+  }
+
+  private getRefuellingsObservable(): Observable<Refuelling[]> {
+    return this.refuellingService.getRefuellings(this.userService.currentUserId.getValue());
+  }
+
   private sortByDate() {
     return (elementA, elementB) => moment(elementA.date).valueOf() - moment(elementB.date).valueOf();
   }
 
   private loadHistory(): void {
-    const currentUserId = this.userService.currentUserId.getValue();
-    forkJoin([this.refuellingService.getRefuellings(currentUserId),
-      this.rideService.getRides(currentUserId)])
-      .subscribe(([refuellings, rides]) => {
-        this.refuellings = refuellings.sort(this.sortByDate());
-        this.rides = rides.sort(this.sortByDate());
-      });
+    const currentUserId =
+      forkJoin([this.getRefuellingsObservable(), this.getRidesObservable()])
+        .subscribe(([refuellings, rides]) => {
+          this.refuellings = refuellings.sort(this.sortByDate());
+          this.rides = rides.sort(this.sortByDate());
+        });
   }
 
   public getPassengerNames(passengerIds: string[]): string {
@@ -54,5 +61,17 @@ export class HistoryComponent implements OnInit {
 
   public getCarName(carId: string): string {
     return this.carIdToCarNameMap.get(carId);
+  }
+
+  private deleteRefuelling(refuelling: Refuelling): void {
+    this.refuellingService.delete(refuelling.id).subscribe(() => {
+      this.getRefuellingsObservable().subscribe(refuellings => this.refuellings = refuellings.sort(this.sortByDate()));
+    });
+  }
+
+  private deleteRide(ride: Ride): void {
+    this.rideService.delete(ride.id).subscribe(() => {
+      this.getRidesObservable().subscribe(rides => this.rides = rides.sort(this.sortByDate()));
+    });
   }
 }
