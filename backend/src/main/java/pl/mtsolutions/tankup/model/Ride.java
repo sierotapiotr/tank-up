@@ -18,6 +18,6 @@ public class Ride {
     private String userId;
     private LocalDateTime date;
     private List<String> passengerIds;
-    private int distance;
+    private double distance;
     private String carId;
 }

@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @GetMapping("{userId}/balance")
-    public UserBalanceResponse getUserBalance(@PathVariable String userId) {
+    public UserBalanceResponse getBalance(@PathVariable String userId) {
         return this.userBalanceService.getUserBalance(userId);
     }
 

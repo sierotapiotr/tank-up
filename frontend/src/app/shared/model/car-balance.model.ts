@@ -1,7 +1,8 @@
-import { Car } from './car.model';
-
 export class CarBalance {
-  car: Car;
+  carId: string;
   tankedFuelCost: number;
   spentFuelCost: number;
+  drivenDistance: number;
+  effectiveDrivenDistance: number;
+  carKilometerCost: number;
 }

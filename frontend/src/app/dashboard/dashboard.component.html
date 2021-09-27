@@ -1,0 +1,21 @@
+<ng-container *ngIf="balance">
+  <p>Bilans: {{balance.totalBalance | number: '.2-2'}} zł</p>
+  <div fxLayout="row">
+    <div fxFlex>Auto</div>
+    <div fxFlex>Bilans</div>
+    <div fxFlex>Koszt tankowań</div>
+    <div fxFlex>Koszt przejazdów</div>
+    <div fxFlex>Dystans</div>
+    <div fxFlex>Efektywny dystans</div>
+    <div fxFlex>Koszt samochodu / 100 km</div>
+  </div>
+  <div fxLayout="row" *ngFor="let carBalance of balance.carBalances">
+    <div fxFlex>{{getCarName(carBalance.carId)}}</div>
+    <div fxFlex>{{(carBalance.tankedFuelCost - carBalance.spentFuelCost) | number: '.2-2'}} zł</div>
+    <div fxFlex>{{carBalance.tankedFuelCost | number: '.2-2'}} zł</div>
+    <div fxFlex>{{carBalance.spentFuelCost | number: '.2-2'}} zł</div>
+    <div fxFlex>{{carBalance.drivenDistance}} km</div>
+    <div fxFlex>{{carBalance.effectiveDrivenDistance | number: '.0-0'}} km</div>
+    <div fxFlex>{{100 * carBalance.carKilometerCost | number: '.2-2'}} zł</div>
+  </div>
+</ng-container>

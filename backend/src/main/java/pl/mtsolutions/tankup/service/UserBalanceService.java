@@ -10,9 +10,11 @@ import pl.mtsolutions.tankup.repository.RefuellingRepository;
 import pl.mtsolutions.tankup.repository.RideRepository;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
-import static java.util.Arrays.stream;
+import static java.math.BigDecimal.ZERO;
+import static java.math.BigDecimal.valueOf;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -35,7 +37,7 @@ public class UserBalanceService {
         var totalBalance = carBalances.stream()
                 .map(carBalance -> carBalance.getTankedFuelCost().subtract(carBalance.getSpentFuelCost()))
                 .reduce(BigDecimal::add)
-                .orElse(BigDecimal.ZERO);
+                .orElse(ZERO);
         return UserBalanceResponse.builder()
                 .totalBalance(totalBalance)
                 .carBalances(carBalances)
@@ -45,33 +47,50 @@ public class UserBalanceService {
     private CarBalanceResponse getUserBalanceForCar(String carId, String userId) {
         var carRides = rideRepository.findAllByCarId(carId);
         var carRefuellings = refuellingRepository.findAllByCarId(carId);
-        var carKilometerCost = getKilometerCost(carRefuellings, carRides);
-        var userCarRides = carRides.stream().filter(ride -> ride.getPassengerIds().contains(userId)).collect(toList());
-        var userCarRefuellings = carRefuellings.stream().filter(refuelling -> refuelling.getUserId().equals(userId)).collect(toList());
+        var carDrivenDistance = valueOf(getDrivenDistance(carRides));
+        var carTankedFuelCost = getTankedFuelCost(carRefuellings);
+        var carKilometerCost = getKilometerCost(carDrivenDistance, carTankedFuelCost);
+
+        var userRides = carRides.stream().filter(ride -> ride.getPassengerIds().contains(userId)).collect(toList());
+        var userRefuellings = carRefuellings.stream().filter(refuelling -> refuelling.getUserId().equals(userId)).collect(toList());
+        var effectiveDrivenDistance = getEffectiveDrivenDistance(userRides);
         return CarBalanceResponse.builder()
                 .carId(carId)
-                .tankedFuelCost(getTankedFuelCost(userCarRefuellings))
-                .spentFuelCost(getSpentFuelCost(userCarRides, carKilometerCost))
+                .tankedFuelCost(getTankedFuelCost(userRefuellings))
+                .spentFuelCost(getSpentFuelCost(valueOf(effectiveDrivenDistance), carKilometerCost))
+                .drivenDistance(getDrivenDistance(userRides))
+                .effectiveDrivenDistance(effectiveDrivenDistance)
+                .carKilometerCost(carKilometerCost)
                 .build();
-    }
-
-    private BigDecimal getSpentFuelCost(List<Ride> rides, BigDecimal kilometerCost) {
-        var kilometres = rides.stream().map(Ride::getDistance).reduce(Integer::sum).orElse(0);
-        return kilometerCost.multiply(BigDecimal.valueOf(kilometres));
-    }
-
-    private BigDecimal getKilometerCost(List<Refuelling> refuellings, List<Ride> rides) {
-        var tankedFuelCost = getTankedFuelCost(refuellings);
-        var drivenDistance = BigDecimal.valueOf(rides.stream()
-                .map(Ride::getDistance)
-                .reduce(0, Integer::sum));
-        return tankedFuelCost.divide(drivenDistance);
     }
 
     private BigDecimal getTankedFuelCost(List<Refuelling> refuellings) {
         return refuellings.stream()
                 .map(Refuelling::getPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+                .reduce(ZERO, BigDecimal::add);
+    }
+
+    private BigDecimal getSpentFuelCost(BigDecimal drivenDistance, BigDecimal kilometerCost) {
+        return kilometerCost.multiply(drivenDistance);
+    }
+
+    private double getDrivenDistance(List<Ride> rides) {
+        return rides.stream()
+                .map(Ride::getDistance)
+                .reduce(0.0, Double::sum);
+    }
+
+    private double getEffectiveDrivenDistance(List<Ride> rides) {
+        return rides.stream()
+                .map(ride -> ride.getDistance() / ride.getPassengerIds().size())
+                .reduce(0.0, Double::sum);
+    }
+
+    private BigDecimal getKilometerCost(BigDecimal drivenDistance, BigDecimal tankedFuelCost) {
+        if (tankedFuelCost.compareTo(ZERO) == 0 || drivenDistance.compareTo(ZERO) == 0) {
+            return ZERO;
+        }
+        return tankedFuelCost.divide(drivenDistance, 4, RoundingMode.HALF_UP);
     }
 
 }

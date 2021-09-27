@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 public class RideRequest {
 
-    private int distance;
+    private double distance;
     private String userId;
     private LocalDate date;
     private List<String> passengerIds;

@@ -13,5 +13,8 @@ public class CarBalanceResponse {
     private String carId;
     private BigDecimal tankedFuelCost;
     private BigDecimal spentFuelCost;
+    private double drivenDistance;
+    private double effectiveDrivenDistance;
+    private BigDecimal carKilometerCost;
 
 }
