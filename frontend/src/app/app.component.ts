@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
     this.currentUserControl.valueChanges.subscribe(id => {
       this.userService.currentUserId.next(id);
       this.userService.setCurrentUserId(id).subscribe();
-    })
+    });
   }
 
   private loadUsers(): void {
@@ -48,6 +48,6 @@ export class AppComponent implements OnInit {
   private loadCars(): void {
     this.carService.getAll().subscribe(cars => {
       this.carService.cars.next(cars);
-    })
+    });
   }
 }

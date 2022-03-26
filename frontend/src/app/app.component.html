@@ -8,7 +8,8 @@
       </mat-option>
     </mat-select>
   </div>
-  <nav fxLayout="row" fxLayoutGap="10px">
+  <nav *ngIf="currentUserControl.value" fxLayout="row" fxLayoutGap="10px">
+    <a routerLink="/dashboard">Bilans</a>
     <a routerLink="/refuelling">Nowe tankowanie</a>
     <a routerLink="/ride">Nowy przejazd</a>
     <a routerLink="/history">Moja historia</a>
