@@ -3,7 +3,7 @@
     <p>Użytkownicy</p>
     <div fxLayout="row" fxLayoutGap="10px" *ngFor="let user of userService.users.getValue()">
       <p>{{user.name}}</p>
-      <button (click)="deleteUser(user.id)">Usuń</button>
+      <button (click)="handleDeleteUserClicked(user)">Usuń</button>
     </div>
     <p>Nowy użytkownik</p>
     <mat-form-field>
@@ -16,7 +16,7 @@
     <p>Samochody</p>
     <div fxLayout="row" fxLayoutGap="10px" *ngFor="let car of activeCars">
       <p>{{car.name}}</p>
-      <button (click)="deleteCar(car.id)">Usuń</button>
+      <button (click)="handleDeleteCarClicked(car)">Usuń</button>
     </div>
     <p>Nowy samochód</p>
     <mat-form-field>
@@ -26,4 +26,4 @@
     <button (click)="addCar(carNameControl.value)">Dodaj</button>
   </div>
 </div>
-<button (click)="resetHistory()">Zresetuj historię</button>
+<button (click)="handleResetHistoryClicked()">Zresetuj historię</button>

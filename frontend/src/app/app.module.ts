@@ -15,17 +15,21 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {RefuellingService} from './shared/service/refuelling.service';
 import {BalanceService} from './shared/service/balance.service';
-import {HttpClient, HttpClientModule, HttpHandler} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import {SnackbarService} from './shared/service/snackbar.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {HistoryComponent} from './history/history.component';
 import {RideService} from './shared/service/ride.service';
-import { AdminComponent } from './admin/admin.component';
+import {AdminComponent} from './admin/admin.component';
 import {UserService} from './shared/service/user.service';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
 import {CookieService} from 'ngx-cookie-service';
 import {CarService} from './shared/service/car.service';
+import {MatIconModule} from '@angular/material/icon';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {ConfirmationDialogComponent} from './dialog/confirmation-dialog/confirmation-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -34,23 +38,27 @@ import {CarService} from './shared/service/car.service';
     RefuellingComponent,
     RideComponent,
     HistoryComponent,
-    AdminComponent
+    AdminComponent,
+    ConfirmationDialogComponent
   ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        NoopAnimationsModule,
-        MatSnackBarModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FlexLayoutModule,
-        MatButtonModule,
-        MatSelectModule,
-        MatCheckboxModule,
-        MatTabsModule
-    ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    NoopAnimationsModule,
+    MatSnackBarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FlexLayoutModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatTabsModule,
+    MatIconModule,
+    MatExpansionModule,
+    MatDialogModule,
+  ],
   providers: [
     FlexLayoutModule,
     CarService,
@@ -59,9 +67,11 @@ import {CarService} from './shared/service/car.service';
     BalanceService,
     SnackbarService,
     UserService,
-    CookieService
+    CookieService,
+    ConfirmationDialogComponent,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ConfirmationDialogComponent],
 })
 export class AppModule {
 }

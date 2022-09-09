@@ -10,6 +10,8 @@ import {RefuellingService} from '../shared/service/refuelling.service';
 import {RideService} from '../shared/service/ride.service';
 import {forkJoin} from 'rxjs';
 import {SnackbarService} from '../shared/service/snackbar.service';
+import {MatDialog} from '@angular/material/dialog';
+import {ConfirmationDialogComponent} from "../dialog/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
   selector: 'app-admin',
@@ -25,7 +27,8 @@ export class AdminComponent implements OnInit {
               private refuellingService: RefuellingService,
               private rideService: RideService,
               private snackbarService: SnackbarService,
-              public userService: UserService) {
+              public userService: UserService,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -33,12 +36,12 @@ export class AdminComponent implements OnInit {
 
   get activeCars(): Car[] {
     return this.carService.cars.getValue().filter(value => value.status === CarStatus.ACTIVE);
-  };
+  }
 
-  private addUser(name: string): void {
+  public addUser(name: string): void {
     const user = new User().fromForm({name});
-    this.userService.create(user).subscribe(user => {
-      this.userService.users.getValue().push(user);
+    this.userService.create(user).subscribe(createdUser => {
+      this.userService.users.getValue().push(createdUser);
     });
   }
 
@@ -52,22 +55,50 @@ export class AdminComponent implements OnInit {
   public addCar(name: string) {
     this.carService.create(name).subscribe(car => {
       this.carService.cars.getValue().push(car);
-    })
+    });
   }
 
-  public deleteCar(id: string) {
+  private deleteCar(id: string) {
     this.carService.delete(id).subscribe(() => {
       const cars = this.carService.cars.getValue().filter(car => car.id !== id);
       this.carService.cars.next(cars);
     });
   }
 
-  public resetHistory(): void {
+  public handleDeleteUserClicked(user: User): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent,
+      {data: {question: `Czy na pewno chcesz usunąć użytkownika ${user.name}?`}});
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteUser(user.id);
+      }
+    });
+  }
+
+  public handleDeleteCarClicked(car: Car): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {question: `Czy na pewno chcesz usunąć samochód ${car.name}?`}});
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteCar(car.id);
+      }
+    });
+  }
+
+  public handleResetHistoryClicked(): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {data: {question: 'Czy na pewno chcesz zresetować historię?'}});
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.resetHistory();
+      }
+    });
+  }
+
+  private resetHistory(): void {
     forkJoin([
       this.refuellingService.deleteAll(),
       this.rideService.deleteAll()])
-      .subscribe(value => {
-        this.snackbarService.positive('Historia zresetowana.')
-      })
+      .subscribe(() => {
+        this.snackbarService.positive('Historia zresetowana.');
+      });
   }
 }

@@ -47,7 +47,6 @@ export class HistoryComponent implements OnInit {
   }
 
   private loadHistory(): void {
-    const currentUserId =
       forkJoin([this.getRefuellingsObservable(), this.getRidesObservable()])
         .subscribe(([refuellings, rides]) => {
           this.refuellings = refuellings.sort(this.sortByDate());

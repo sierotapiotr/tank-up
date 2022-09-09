@@ -18,16 +18,21 @@ export class DashboardComponent implements OnInit {
   private carIdToCarNameMap = new Map();
 
   ngOnInit() {
-    this.userService.getBalance(this.userService.currentUserId.getValue()).subscribe(balance => {
-      this.balance = balance;
-    });
+    this.loadBalance();
     this.carService.cars.subscribe(cars => {
-      cars.forEach(car => this.carIdToCarNameMap.set(car.id, car.name))
-    })
+      cars.forEach(car => this.carIdToCarNameMap.set(car.id, car.name));
+    });
+    this.userService.currentUserId.subscribe(() => this.loadBalance());
   }
 
   public getCarName(carId: string): string {
     return this.carIdToCarNameMap.get(carId);
+  }
+
+  private loadBalance(): void {
+    this.userService.getBalance(this.userService.currentUserId.getValue()).subscribe(balance => {
+      this.balance = balance;
+    });
   }
 
 }

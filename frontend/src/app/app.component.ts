@@ -3,6 +3,7 @@ import {UserService} from './shared/service/user.service';
 import {CookieService} from 'ngx-cookie-service';
 import {FormControl} from '@angular/forms';
 import {CarService} from './shared/service/car.service';
+import {User} from "./shared/model/user.model";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent implements OnInit {
 
   private static CURRENT_USER_COOKIE_NAME = 'userId';
 
-  public title = 'Tank up';
+  public title = 'Paliwko';
   public currentUserControl = new FormControl();
 
   constructor(private carService: CarService,
@@ -49,5 +50,11 @@ export class AppComponent implements OnInit {
     this.carService.getAll().subscribe(cars => {
       this.carService.cars.next(cars);
     });
+  }
+
+  public getCurrentUserName(): string {
+    const user: User = this.userService.users.getValue()
+      .find(value => value.id === this.currentUserControl.value);
+    return user ? user.name : '';
   }
 }

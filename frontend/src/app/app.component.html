@@ -1,19 +1,32 @@
 <div fxLayout="column" fxLayoutGap="10px">
-  <h1 routerLink="/dashboard">{{title}}</h1>
-  <div fxLayout="row" fxLayoutGap="10px">
-    <span>Użytkownik:</span>
-    <mat-select fxFlex="80px" [formControl]="currentUserControl">
-      <mat-option *ngFor="let user of userService.users.getValue()" [value]="user.id">
-        {{user.name}}
-      </mat-option>
-    </mat-select>
+  <div class="row" fxFlexAlign="space-between">
+    <h1 fxFlex routerLink="/dashboard">{{title}}</h1>
+    <div fxFlex fxFlexAlign="center" fxLayout="row" fxLayoutGap="10px">
+      <span>Użytkownik:</span>
+      <mat-select fxFlex="80px" [formControl]="currentUserControl" class="margin-top-2">
+        <mat-option *ngFor="let user of userService.users.getValue()" [value]="user.id">
+          {{user.name}}
+        </mat-option>
+      </mat-select>
+    </div>
   </div>
-  <nav *ngIf="currentUserControl.value" fxLayout="row" fxLayoutGap="10px">
-    <a routerLink="/dashboard">Bilans</a>
-    <a routerLink="/refuelling">Nowe tankowanie</a>
-    <a routerLink="/ride">Nowy przejazd</a>
-    <a routerLink="/history">Moja historia</a>
-    <a routerLink="/admin">Ustawienia</a>
+  <nav *ngIf="currentUserControl.value?.length" fxLayout="row" fxLayoutGap="40px" class="nav-menu">
+    <a routerLink="/dashboard">
+      <mat-icon>home</mat-icon>
+    </a>
+    <a routerLink="/refuelling">
+      <mat-icon>local_gas_station</mat-icon>
+    </a>
+    <a routerLink="/ride">
+      <mat-icon>directions_car</mat-icon>
+    </a>
+    <a routerLink="/history">
+      <mat-icon>list</mat-icon>
+    </a>
+    <a *ngIf="getCurrentUserName() === 'Pierot'" routerLink="/admin">
+      <mat-icon>settings</mat-icon>
+    </a>
   </nav>
+  <p *ngIf="!currentUserControl.value?.length"><i>Proszę wybrać użytkownika</i></p>
 </div>
 <router-outlet></router-outlet>

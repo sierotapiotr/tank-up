@@ -1,3 +1,4 @@
+<h2>Historia</h2>
 <mat-tab-group>
   <mat-tab label="Przejazdy">
     <div fxLayout="row" fxLayoutGap="10px">
@@ -13,7 +14,7 @@
       <p fxFlex>{{ride.distance}} km</p>
       <p fxFlex>{{getPassengerNames(ride.passengerIds)}}</p>
       <div fxFlex>
-        <button (click)="deleteRide(ride)">Usuń</button>
+        <button mat-button (click)="deleteRide(ride)">Usuń</button>
       </div>
     </div>
   </mat-tab>
@@ -31,7 +32,7 @@
       <p fxFlex>{{refuelling.price}} zł</p>
       <p fxFlex>{{fuelTypeNames[refuelling.fuelType]}}</p>
       <div fxFlex>
-        <button (click)="deleteRefuelling(refuelling)">Usuń</button>
+        <button mat-button (click)="deleteRefuelling(refuelling)">Usuń</button>
       </div>
     </div>
   </mat-tab>
