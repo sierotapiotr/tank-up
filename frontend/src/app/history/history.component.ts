@@ -62,13 +62,13 @@ export class HistoryComponent implements OnInit {
     return this.carIdToCarNameMap.get(carId);
   }
 
-  private deleteRefuelling(refuelling: Refuelling): void {
+  public deleteRefuelling(refuelling: Refuelling): void {
     this.refuellingService.delete(refuelling.id).subscribe(() => {
       this.getRefuellingsObservable().subscribe(refuellings => this.refuellings = refuellings.sort(this.sortByDate()));
     });
   }
 
-  private deleteRide(ride: Ride): void {
+  public deleteRide(ride: Ride): void {
     this.rideService.delete(ride.id).subscribe(() => {
       this.getRidesObservable().subscribe(rides => this.rides = rides.sort(this.sortByDate()));
     });
