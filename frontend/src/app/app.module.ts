@@ -30,6 +30,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {ConfirmationDialogComponent} from './dialog/confirmation-dialog/confirmation-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {AngularFireModule} from '@angular/fire/compat';
+import {environment} from '../environments/environment.prod';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     ConfirmationDialogComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
@@ -58,6 +61,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatIconModule,
     MatExpansionModule,
     MatDialogModule,
+    AngularFireModule,
   ],
   providers: [
     FlexLayoutModule,
